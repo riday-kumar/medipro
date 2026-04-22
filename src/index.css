@@ -1,2 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #07332f;
+  --color-secondary: #f7a582;
+}
+body {
+  font-family: "Figtree", sans-serif;
+}
+
+a.active {
+  color: var(--color-secondary);
+}
