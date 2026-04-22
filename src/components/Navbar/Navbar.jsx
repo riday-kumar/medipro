@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router";
 const Navbar = () => {
   return (
     <Width>
-      <div className="navbar shadow-sm text-white">
+      <div className="navbar shadow-sm text-white py-5">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -77,7 +77,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end max-md:hidden">
+        <div className="navbar-end max-xl:hidden">
           <Link className="group relative btn rounded-2xl border-2 border-secondary bg-transparent text-secondary text-2xl py-5">
             <span className="relative rounded-2xl z-10 group-hover:text-secondary transition duration-300">
               Book Appointment
