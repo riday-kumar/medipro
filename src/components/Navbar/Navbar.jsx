@@ -1,8 +1,28 @@
 import React from "react";
 import Width from "../FixedWidth/Width";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  let navigate = useNavigate();
+  const userHas = false;
+  const handleAppointmentPage = () => {
+    if (userHas) {
+      navigate("/appointment");
+    } else {
+      toast.error("Please Login", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      navigate("/about");
+    }
+  };
   return (
     <Width>
       <div className="navbar shadow-sm text-white py-5">
@@ -45,7 +65,10 @@ const Navbar = () => {
                 <NavLink className="text-[16px]">Contact Us</NavLink>
               </li>
               <li>
-                <Link className="group relative btn btn-sm rounded-2xl border-2 border-secondary bg-transparent text-secondary text-xl py-5">
+                <Link
+                  to="/appointment"
+                  className="group relative btn btn-sm rounded-2xl border-2 border-secondary bg-transparent text-secondary text-xl py-5"
+                >
                   <span className="relative rounded-2xl z-10 group-hover:text-secondary transition duration-300">
                     Appointment
                   </span>
@@ -55,7 +78,7 @@ const Navbar = () => {
             </ul>
           </div>
           <Link className="font-bold text-2xl">
-            Medi<span className="text-secondary">Pro</span>
+            Medi<span className="text-secondary">Help</span>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -78,12 +101,16 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end max-xl:hidden">
-          <Link className="group relative btn rounded-2xl border-2 border-secondary bg-transparent text-secondary text-2xl py-5">
+          <button
+            onClick={handleAppointmentPage}
+            to="/appointment"
+            className="group relative btn rounded-2xl border-2 border-secondary bg-transparent text-secondary text-2xl py-5"
+          >
             <span className="relative rounded-2xl z-10 group-hover:text-secondary transition duration-300">
               Book Appointment
             </span>
             <span className="absolute rounded-2xl left-0 top-0 h-full w-0 bg-[#fff7f4] transition-all duration-300 group-hover:w-full"></span>
-          </Link>
+          </button>
         </div>
       </div>
     </Width>
