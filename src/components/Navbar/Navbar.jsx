@@ -6,7 +6,8 @@ import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
   let navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logOut, loading } = useAuth();
+  // console.log(user.photoURL);
 
   const handleAppointmentPage = () => {
     if (user) {
@@ -25,6 +26,22 @@ const Navbar = () => {
       navigate("/auth/login");
     }
   };
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Log Out Successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something Went Wrong");
+      });
+  };
+
+  if (loading) {
+    return <span>Loading...</span>;
+  }
+
   return (
     <Width>
       <div className="navbar shadow-sm text-white py-5">
@@ -109,10 +126,40 @@ const Navbar = () => {
             className="group relative btn rounded-2xl border-2 border-secondary bg-transparent text-secondary text-2xl py-5"
           >
             <span className="relative rounded-2xl z-10 group-hover:text-secondary transition duration-300">
-              Book Appointment
+              Appointment
             </span>
             <span className="absolute rounded-2xl left-0 top-0 h-full w-0 bg-[#fff7f4] transition-all duration-300 group-hover:w-full"></span>
           </button>
+          {user && (
+            <div className="ml-2 bg-primary text-white">
+              <div className="dropdown dropdown-end bg-primary">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src={user?.photoURL}
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex="-1"
+                  className="bg-primary menu menu-sm dropdown-content border-2 border-secondary rounded-box z-1 mt-3 w-52 p-2 shadow"
+                >
+                  <li className="hover:text-secondary">
+                    <a className="justify-between">Profile</a>
+                  </li>
+
+                  <li className="hover:text-secondary" onClick={handleLogOut}>
+                    <a>Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </Width>
