@@ -2,12 +2,14 @@ import React from "react";
 import Width from "../FixedWidth/Width";
 import { Link, NavLink, useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
   let navigate = useNavigate();
-  const userHas = false;
+  const { user } = useAuth();
+
   const handleAppointmentPage = () => {
-    if (userHas) {
+    if (user) {
       navigate("/appointment");
     } else {
       toast.error("Please Login", {
@@ -20,7 +22,7 @@ const Navbar = () => {
         progress: undefined,
         theme: "light",
       });
-      navigate("/about");
+      navigate("/auth/login");
     }
   };
   return (
