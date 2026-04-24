@@ -1,12 +1,13 @@
 import React from "react";
 import { createBrowserRouter } from "react-router";
-import RootLayout from "./layout/RootLayout";
-import Home from "./pages/Home/Home/Home";
-import About from "./pages/AboutUs/About";
-import Appointment from "./pages/BookAppointment/Appointment";
-import Login from "./pages/Login/Login";
-import Registration from "./pages/Registration/Registration";
-import AuthLayout from "./layout/AuthLayout";
+import RootLayout from "../layout/RootLayout";
+import Home from "../pages/Home/Home/Home";
+import About from "../pages/AboutUs/About";
+import Appointment from "../pages/BookAppointment/Appointment";
+import Login from "../pages/Login/Login";
+import Registration from "../pages/Registration/Registration";
+import AuthLayout from "../layout/AuthLayout";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
       },
       {
         path: "appointment",
-        Component: Appointment,
+        element: (
+          <PrivateRoute>
+            <Appointment></Appointment>
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
